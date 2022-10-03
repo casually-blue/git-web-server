@@ -10,7 +10,7 @@
   outputs = { self, nixpkgs, naersk }:
     let
       cargoToml = (builtins.fromTOML (builtins.readFile ./Cargo.toml));
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
     in
     {
@@ -71,8 +71,11 @@
           buildInputs = with pkgs; [
             rustfmt
             nixpkgs-fmt
+            rust-analyzer
           ];
           LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+
+            RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
         });
     };
 }
