@@ -1,0 +1,16 @@
+{% macro sidebar(elements) %}
+<div id="main-sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <a class="icon-text" href="/">Git Server</a>
+        <a href="#" class="sidebar-toggle">
+            <img class="icon-image" src="/static/icons/git.svg" onclick="toggle_sidebar()">
+        </a>
+    </div>
+
+    <hr>
+
+    {% for element in elements %}
+        <a href="#"><img class="icon-image" src="{{element.1}}">&nbsp;<span class="icon-text">{{element.0}}</span></a><br>
+    {% endfor %}
+  </div>
+{% endmacro sidebar %}
